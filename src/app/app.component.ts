@@ -1,5 +1,6 @@
 import { Component, LOCALE_ID, Inject} from '@angular/core';
 import { getLocaleCurrencyName, getLocaleCurrencySymbol } from '@angular/common';
+import {FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -7,11 +8,28 @@ import { getLocaleCurrencyName, getLocaleCurrencySymbol } from '@angular/common'
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  today = Date.now();
+  today = new Date();
   money = 1000000;
   curreyName = getLocaleCurrencyName(this.locale);
   currenySymbol = getLocaleCurrencySymbol(this.locale);
   
   constructor(@Inject(LOCALE_ID) public locale: string){
   }
+
+  setToFr(){
+
+  }
+
+  setToAU(){
+
+  }
+
+  setToUk(){
+
+  }
+
+  setToUs(){
+
+  }
+
 }

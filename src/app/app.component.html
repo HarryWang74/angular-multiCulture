@@ -1,3 +1,5 @@
+<button>AU</button> <button>UK</button> <button>FR</button> <button>US</button> 
+<hr>
 <h1>localeID = {{locale}}</h1>
 <h1>curreyName = {{curreyName}}</h1>
 <h1>currenySymbol = {{currenySymbol}}</h1>
@@ -6,7 +8,12 @@
 <h1>{{today | date:'shortDate' }}</h1>
 <h1>{{today | date:'mediumDate' }}</h1>
 <h1>{{today | date:'longDate' }}</h1>
+<mat-form-field>
+    <input matInput [matDatepicker]="dp" placeholder="Different locale" [(ngModel)]="today"> 
+    <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+    <mat-datepicker #dp></mat-datepicker>
+</mat-form-field>
 <hr>
-<h1>{{ money | currency }}</h1>
+<!-- <h1>{{ money | currency }}</h1> -->
 
 

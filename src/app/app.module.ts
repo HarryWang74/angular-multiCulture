@@ -1,13 +1,13 @@
 import { BrowserModule} from '@angular/platform-browser';
 import { NgModule, LOCALE_ID } from '@angular/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-
+import { FormsModule, ReactiveFormsModule, FormControl } from '@angular/forms';
 import { AppComponent } from './app.component';
 
-import { registerLocaleData } from '@angular/common';
-import locale from '@angular/common/locales/fr';
+// import { registerLocaleData } from '@angular/common';
+// import locale from '@angular/common/locales/fr';
 // import * as locale from '@angular/common/locales/';
-registerLocaleData(locale, 'fr');
+// registerLocaleData(locale, 'fr');
 
 import {
   MatAutocompleteModule,
@@ -81,10 +81,12 @@ import {
     MatTableModule,
     MatTabsModule,
     MatToolbarModule,
-    MatTooltipModule
+    MatTooltipModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
-    { provide: LOCALE_ID, useValue: 'fr' }
+    // { provide: LOCALE_ID, useValue: 'fr' }
   ],
   bootstrap: [AppComponent]
 })
