@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, LOCALE_ID, Inject} from '@angular/core';
+import { getLocaleCurrencyName, getLocaleCurrencySymbol } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+  today = Date.now();
+  money = 1000000;
+  curreyName = getLocaleCurrencyName(this.locale);
+  currenySymbol = getLocaleCurrencySymbol(this.locale);
+  
+  constructor(@Inject(LOCALE_ID) public locale: string){
+  }
 }
