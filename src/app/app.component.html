@@ -1,19 +1,40 @@
-<button>AU</button> <button>UK</button> <button>FR</button> <button>US</button> 
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-12">
+                <h2>localeID = {{locale}}</h2>
+                <hr>
+        </div>
+    </div>
+    <div class="row">
+            <div class="col-md-12">
+                    <h2>Date</h2>
+                    <h3>{{today | amDateFormat:'LL' }}</h3>
+                    <mat-form-field>
+                        <input matInput [matDatepicker]="dp" [(ngModel)]="today"> 
+                        <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+                        <mat-datepicker #dp></mat-datepicker>
+                    </mat-form-field>
+                    <hr>
+            </div>
+        </div>
+    <div class="row">
+        <div class="col-md-12 text-right">
+            <button type="button" class="btn" (click)="setToUS()" [ngClass]="{ 'btn-primary': locale == 'en-US' }">US</button> 
+            <button type="button" class="btn" (click)="setToAU()" [ngClass]="{ 'btn-primary': locale == 'en-AU' }">AU</button> 
+            <button type="button" class="btn" (click)="setToUk()" [ngClass]="{ 'btn-primary': locale == 'en-GB' }">UK</button> 
+            <button type="button" class="btn" (click)="setToFr()" [ngClass]="{ 'btn-primary': locale == 'fr' }">FR</button>
+            <button type="button" class="btn" (click)="setToJP()" [ngClass]="{ 'btn-primary': locale == 'ja-JP' }">JP</button> 
+        </div>
+    </div>
+</div>
+
+
 <hr>
-<h1>localeID = {{locale}}</h1>
-<h1>curreyName = {{curreyName}}</h1>
-<h1>currenySymbol = {{currenySymbol}}</h1>
-<hr>
-<h1>{{today | date}}</h1>
-<h1>{{today | date:'shortDate' }}</h1>
-<h1>{{today | date:'mediumDate' }}</h1>
-<h1>{{today | date:'longDate' }}</h1>
-<mat-form-field>
-    <input matInput [matDatepicker]="dp" placeholder="Different locale" [(ngModel)]="today"> 
-    <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
-    <mat-datepicker #dp></mat-datepicker>
-</mat-form-field>
-<hr>
+
+<!--
+
+-->
 <!-- <h1>{{ money | currency }}</h1> -->
 
 

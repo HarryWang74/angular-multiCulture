@@ -1,35 +1,46 @@
-import { Component, LOCALE_ID, Inject} from '@angular/core';
-import { getLocaleCurrencyName, getLocaleCurrencySymbol } from '@angular/common';
-import {FormControl} from '@angular/forms';
+import { Component, Inject} from '@angular/core';
+import { DateAdapter } from '@angular/material/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent {
   today = new Date();
   money = 1000000;
-  curreyName = getLocaleCurrencyName(this.locale);
-  currenySymbol = getLocaleCurrencySymbol(this.locale);
-  
-  constructor(@Inject(LOCALE_ID) public locale: string){
+  locale = 'en-AU';
+  constructor(
+    private adapter: DateAdapter<any>,
+  ){
   }
 
-  setToFr(){
+  ngOnInit() {
+	}
 
+  setToFr() {
+    this.locale = 'fr';
+    this.adapter.setLocale('fr');
   }
 
-  setToAU(){
-
+  setToAU() {
+    this.locale = 'en-AU';
+    this.adapter.setLocale('en-AU');
   }
 
-  setToUk(){
-
+  setToUk() {
+    this.locale = 'en-GB';
+    this.adapter.setLocale('en-GB');
   }
 
-  setToUs(){
-
+  setToUS() {
+    this.locale = 'en-US';
+    this.adapter.setLocale('en-US');
   }
 
+  setToJP() {
+    this.locale = 'ja-JP';
+    this.adapter.setLocale('ja-JP');
+  }
 }
