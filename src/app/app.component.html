@@ -9,7 +9,7 @@
     <div class="row">
             <div class="col-md-12">
                     <h2>Date</h2>
-                    <h3>{{today | amDateFormat:'LL' }}</h3>
+                    <h3>{{today | date }}</h3>
                     <mat-form-field>
                         <input matInput [matDatepicker]="dp" [(ngModel)]="today"> 
                         <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
@@ -17,7 +17,14 @@
                     </mat-form-field>
                     <hr>
             </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+                <h2>Currency</h2>
+                <h3>{{ money | currency }}</h3>
+                <hr>
         </div>
+    </div>
     <div class="row">
         <div class="col-md-12 text-right">
             <button type="button" class="btn" (click)="setToUS()" [ngClass]="{ 'btn-primary': locale == 'en-US' }">US</button> 

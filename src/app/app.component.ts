@@ -1,4 +1,4 @@
-import { Component, Inject} from '@angular/core';
+import { Component, Inject, ChangeDetectorRef} from '@angular/core';
 import { DateAdapter } from '@angular/material/core';
 
 @Component({
@@ -12,11 +12,13 @@ export class AppComponent {
   money = 1000000;
   locale = 'en-AU';
   constructor(
+    private ref: ChangeDetectorRef,
     private adapter: DateAdapter<any>,
   ){
   }
 
   ngOnInit() {
+
 	}
 
   setToFr() {

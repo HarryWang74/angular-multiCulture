@@ -1,16 +1,10 @@
 import { BrowserModule} from '@angular/platform-browser';
-import { NgModule, LOCALE_ID } from '@angular/core';
+import { NgModule, LOCALE_ID, APP_INITIALIZER } from '@angular/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from '@angular/material-moment-adapter';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
-import { CultureService } from './culture.service';
-// import { registerLocaleData } from '@angular/common';
-// import locale from '@angular/common/locales/fr';
-// import * as locale from '@angular/common/locales/';
-// registerLocaleData(locale, 'fr');
-
 import {
   MatAutocompleteModule,
   MatButtonModule,
@@ -46,6 +40,54 @@ import {
   MatTooltipModule
 } from '@angular/material';
 import { MomentModule } from 'angular2-moment';
+import { registerLocaleData } from '@angular/common';
+
+declare var System;
+
+export class LocaleService {
+  getLocale(): string {
+    /*
+    if (typeof window === 'undefined' || typeof window.navigator === 'undefined') {
+      return undefined;
+    }
+
+    let browserLang: any = window.navigator['languages'] ? window.navigator['languages'][0] : null;
+    browserLang = browserLang || window.navigator.language || window.navigator['browserLanguage'] || window.navigator['userLanguage'];
+
+    if (browserLang.indexOf('-') !== -1) {
+      browserLang = browserLang.split('-')[0];
+    }
+
+    if (browserLang.indexOf('_') !== -1) {
+      browserLang = browserLang.split('_')[0];
+    }
+
+    console.log(browserLang);
+    return browserLang;
+    */
+
+    return 'en-GB';
+  }
+}
+
+export function localeIdFactory(localeService: LocaleService) {
+  return localeService.getLocale();
+}
+
+export function localeInitializer(localeId: string) {
+  return (): Promise<any> => {
+    return new Promise((resolve, reject) => {
+      System.import(`@angular/common/locales/${localeId}.js`)
+        .then(module => {
+          console.log(module);
+          registerLocaleData(module.default);
+          resolve();
+        }, reject);
+    });
+  };
+}
+
+
 @NgModule({
   declarations: [
     AppComponent
@@ -89,8 +131,16 @@ import { MomentModule } from 'angular2-moment';
     MomentModule
   ],
   providers: [
-    // { provide: LOCALE_ID, useValue: 'fr' }
-    CultureService,
+    LocaleService,
+    { provide: LOCALE_ID, useFactory: localeIdFactory, deps: [LocaleService] },
+    {
+      provide: APP_INITIALIZER,
+      multi: true,
+      useFactory: localeInitializer,
+      deps: [LOCALE_ID]
+    },
+
+
     // angular material date pciker setup
     { provide: MAT_DATE_LOCALE, useValue: 'en-AU'},
     { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
